@@ -20,13 +20,15 @@ const requestHandler = (req, res) => {
     res.setHeader("Content-Type", "text/html");
     res.write("<html>");
     res.write("<head><title>Assignment 1</title></head>");
-    console.log(newUsers)
     res.write("<body><ul>")
+
+    //above and beyond part
     for(user of newUsers){
         res.write("<li>");
         res.write(user);
         res.write("</li>");
     }
+
     res.write("</ul></body>");
     res.write("</html>");
     return res.end();
@@ -42,7 +44,6 @@ const requestHandler = (req, res) => {
       username = parsedBody.split("=")[1];
       console.log(username); // username=whatever_the_username_is
       newUsers.push(username);
-      console.log(newUsers)
     });
     console.log(newUsers)
     res.statusCode = 302;
