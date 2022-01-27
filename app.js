@@ -35,16 +35,12 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 const corsOptions = {
-  origin: "https://<your_app_name>.herokuapp.com/",
+  origin: "https://doda-online-store1.herokuapp.com/",
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 
 const options = {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
   family: 4
 };
 
