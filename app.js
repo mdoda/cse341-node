@@ -1,8 +1,11 @@
+const PORT = process.env.PORT || 5000
+
 const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const session = require('express-session');
 const MongoDBStore =require('connect-mongodb-session')(session);
 const csrf = require('csurf');
@@ -65,12 +68,36 @@ app.use(authRoutes);
 
 app.use(errorController.get404);
 
+const corsOptions = {
+  origin: "https://doda-online-store1.herokuapp.com/",
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+const options = {
+  family: 4
+};
+
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://mdoda111:Forzamilan123455555@cluster0.rwppj.mongodb.net/shop?retryWrites=true&w=majority";
+
+
 mongoose
   .connect(
-    MONGODB_URI
-  )
-  .then(result => {
-    app.listen(3000);
+    MONGODB_URL,
+    options )
+ .then((result) => {
+   User.findOne().then((user) => {
+     if (!user) {
+       const user = new User({
+         name: "Mateo",
+         email: "mateo@gmail.com",
+         cart: {
+           items: [],
+         },
+       });
+       user.save();
+     }
+   });
+   app.listen(PORT);
   })
   .catch(err => {
     console.log(err);
