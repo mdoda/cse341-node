@@ -148,7 +148,7 @@ exports.getOrders = (req, res, next) => {
 
 
 exports.getFavoriteProducts = (req, res, next) => {
-  Product.find({ userId: req.user._id })
+  Product.find({ favorite: true})
     .then(products => {
       console.log(products);
       res.render('shop/favorite-products', {
@@ -170,7 +170,6 @@ exports.postFavoriteProducts = (req, res, next) => {
   Product.findById(prodId)
     .then(product => {
       product.favorite = true;
- 
       return product.save();
     })
     .then(result => {
