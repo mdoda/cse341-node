@@ -14,6 +14,11 @@
                                 <header class="card__header">
                                     <h1 class="product__title">
                                         <%= product.title %>
+                                        <form action="/remove-favorites" method="POST">
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <input type="hidden" name="productId" value="<%= product._id %>">
+                                            <button class="btn-liked" type="submit">Unlike</button>
+                                        </form>
                                     </h1>
                                 </header>
                                 <div class="card__image">

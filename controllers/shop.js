@@ -181,3 +181,21 @@ exports.postFavoriteProducts = (req, res, next) => {
       return next(error);
     });
 };
+
+exports.removeFromFavorites= (req, res, next) => {
+  const prodId = req.body.productId;
+  console.log(prodId)
+  Product.findById(prodId)
+    .then(product => {
+      product.favorite = false;
+      return product.save();
+    })
+    .then(result => {
+      res.redirect('/favorites')
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};

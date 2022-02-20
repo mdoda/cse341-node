@@ -27,4 +27,6 @@ router.get('/favorites', isAuth, shopController.getFavoriteProducts);
 
 router.post('/favorites', isAuth, shopController.postFavoriteProducts);
 
+router.post('/remove-favorites', isAuth, shopController.removeFromFavorites);
+
 module.exports = router;
