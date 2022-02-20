@@ -227,14 +227,16 @@ form {
 }
 
 .btn.danger {
-  color: red;
+  background-color:red;
+  color: white;
   border-color: red;
 }
 
 .btn.danger:hover,
 .btn.danger:active {
-  background: red;
+  background: rgb(129, 18, 18);
   color: white;
+  border-color:rgb(129, 18, 18);
 }
 
 .btn-liked{
