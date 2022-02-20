@@ -14,3 +14,10 @@ function menuToggleClickHandler() {
 
 backdrop.addEventListener('click', backdropClickHandler);
 menuToggle.addEventListener('click', menuToggleClickHandler);
+
+function myFunction(lightModeOn) {
+  var element = document.body;
+  console.log(element);
+  element.classList.toggle("dark");
+  return !lightModeOn;
+}

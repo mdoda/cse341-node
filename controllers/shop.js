@@ -63,9 +63,10 @@ exports.getCart = (req, res, next) => {
       });
     })
     .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+      // const error = new Error(err);
+      // error.httpStatusCode = 500;
+      // return next(error);
+      console.log(err);
     });
 };
 
@@ -137,6 +138,43 @@ exports.getOrders = (req, res, next) => {
         pageTitle: 'Your Orders',
         orders: orders
       });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+
+exports.getFavoriteProducts = (req, res, next) => {
+  Product.find({ userId: req.user._id })
+    .then(products => {
+      console.log(products);
+      res.render('shop/favorite-products', {
+        prods: products,
+        pageTitle: 'Favorite Products',
+        path: '/favorites'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+exports.postFavoriteProducts = (req, res, next) => {
+  const prodId = req.body.productId;
+  console.log(prodId)
+  Product.findById(prodId)
+    .then(product => {
+      product.favorite = true;
+ 
+      return product.save();
+    })
+    .then(result => {
+      res.redirect('/favorites')
     })
     .catch(err => {
       const error = new Error(err);

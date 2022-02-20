@@ -6,22 +6,15 @@
         <%- include('../includes/navigation.ejs') %>
 
             <main>
-                <% if (prods.length > 0) { %>
+                <% if (prods.length) { %>
                     <div class="grid">
                         <% for (let product of prods) { %>
+                            <% if (product.favorite) { %>
                             <article class="card product-item">
                                 <header class="card__header">
                                     <h1 class="product__title">
                                         <%= product.title %>
-                                        <span class="card__actions">
-                                            <form action="/favorites" method="POST">
-                                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                                <input type="hidden" name="productId" value="<%= product._id %>">
-                                                <button class="btn-liked" type="submit">Like</button>
-                                            </form>
-                                        </span>
                                     </h1>
-                             
                                 </header>
                                 <div class="card__image">
                                     <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
@@ -38,18 +31,14 @@
                                     <a href="/products/<%= product._id %>" class="btn">Details</a>
                                     <% if (isAuthenticated) { %>
                                         <%- include('../includes/add-to-cart.ejs', {product: product}) %>
-                                        <!-- <form action="/favorites" method="POST">
-                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                            <input type="hidden" name="productId" value="<%= product._id %>">
-                                            <button class="btn" type="submit">Add To Favorites</button>
-                                        </form> -->
                                     <% } %>
                                 </div>
                             </article>
                             <% } %>
+                            <% } %>
                     </div>
                     <% } else { %>
                         <h1>No Products Found!</h1>
-                        <% } %>
+                    <% } %>
             </main>
             <%- include('../includes/end.ejs') %>

@@ -23,4 +23,8 @@ router.post('/create-order', isAuth, shopController.postOrder);
 
 router.get('/orders', isAuth, shopController.getOrders);
 
+router.get('/favorites', isAuth, shopController.getFavoriteProducts);
+
+router.post('/favorites', isAuth, shopController.postFavoriteProducts);
+
 module.exports = router;

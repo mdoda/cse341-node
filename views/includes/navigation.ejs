@@ -11,6 +11,9 @@
             </li>
             <% if (isAuthenticated) { %>
                 <li class="main-header__item">
+                    <a class="<%= path === '/favorites' ? 'active' : '' %>" href="/favorites">Favorites</a>
+                </li>
+                <li class="main-header__item">
                     <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
                 </li>
                 <li class="main-header__item">
@@ -27,6 +30,9 @@
             <% } %>
         </ul>
         <ul class="main-header__item-list">
+            <li>
+                <button class="btn-mode"  onClick='myFunction("<%= locals.lightModeOn %>")'>Switch mode</button>
+            </li>
             <% if (!isAuthenticated) { %>
                 <li class="main-header__item">
                     <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
